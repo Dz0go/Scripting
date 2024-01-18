@@ -7,11 +7,8 @@ public class SceneChange : MonoBehaviour
 {
     public string SceneName;
 
-
-         private void OnTriggerEnter(Collider other)
-          {
-               EditorSceneManager.LoadScene(SceneName);
-        
-          }
+    private void OnTriggerEnter(Collider other)
+    {
+        EditorSceneManager.LoadScene(SceneName);
+    }
 }
-
