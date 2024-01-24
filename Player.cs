@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class Player : MonoBehaviour
 {
     private int health = 10;
     public GameObject fireballPrefab;
     public Transform AttackPoint;
 
-     void Update()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             RestartLevel();
         }
@@ -35,4 +36,12 @@ public class Player : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
+    
+     private int coins;
+
+            public void CollectCoins()
+            {
+                coins++;
+                print("Cобранные монетки: " + coins);
+            }
 }
