@@ -2,42 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour
-    
 {
-    private int min;
-    private float sec;
-    private Text textObject;
-
-    // Update is called once per frame
+    public TextMeshProUGUI timer;
+    public int minutes = 3;
+    public float secundes = 59.0f;
     void Update()
     {
-        
-
-        sec -= Time.deltaTime;
-        
-        if (sec <= 0)
+        secundes -= Time.deltaTime;
+        timer.text = minutes + ":" + secundes;
+        if (secundes <= 0)
         {
-            if (min > 0)
+            if (minutes > 0)
             {
-                sec += 59;
-                min --;
-
+                minutes = 1;
+                secundes = 59.0f;
             }
             else
             {
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-                void RestartLevel()
-                {
-                    Scene currentScene = SceneManager.GetActiveScene();
-                    SceneManager.LoadScene(currentScene.buildIndex);
-                }
+                int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(sceneIndex);
             }
         }
-        int roundSeconds = Mathf.RoundToInt(sec);
-        textObject.text = min.ToString() + ":" + roundSeconds.ToString();
+    }
+}
     }
 }
