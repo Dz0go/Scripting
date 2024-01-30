@@ -21,4 +21,4 @@ public class PlayerUi : MonoBehaviour
         CoinsCounter.text = "coins:" + player.coins;
     }
 }
-}
+
