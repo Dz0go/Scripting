@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class PlayerUi : MonoBehaviour
+public class PlayerUI : MonoBehaviour
 {
-
     public Slider healthBar;
     public TMPro.TextMeshProUGUI CoinsCounter;
     public Player player;

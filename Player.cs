@@ -1,47 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 public class Player : MonoBehaviour
 {
-    private int health = 10;
-    public GameObject fireballPrefab;
-    public Transform AttackPoint;
+    //Поля
 
-    void Update()
+    //Здоровье
+    public int health = 10;
+    public int maxHealth = 10;
+    //Монеты
+    public int coins = 0;
+
+    //Префаб огненого шара
+    public GameObject fireballPrefab;
+
+    //Место откуда огненый шар появляеться
+    public Transform attackPoint;
+
+
+
+    private void Update()
     {
+        //Условие нажатие на лкм
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(fireballPrefab,
-      AttackPoint.
-      position, AttackPoint.
-      rotation);
+            //Создание копии(префаб,где появиться,поворот)
+            Instantiate(fireballPrefab, attackPoint.position, attackPoint.rotation);
         }
     }
 
+    //Метод получения урона
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
-        {
-            RestartLevel();
-        }
-        print("Здоровье игрока: " + health);
+        print("Health:" + health);
     }
 
-    private void RestartLevel()
+    //Метод увелечения монет
+    public void CollectCoins()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.buildIndex);
+        coins += 1;
+        print("coins" + coins);
     }
-    
-     private int coins;
-
-            public void CollectCoins()
-            {
-                coins++;
-                print("Cобранные монетки: " + coins);
-            }
 }
