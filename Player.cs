@@ -1,46 +1,43 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    //Поля
+    public static int score = 0;
+    public static List<Square> squares;
+    
 
-    //Здоровье
-    public int health = 10;
-    public int maxHealth = 10;
-    //Монеты
-    public int coins = 0;
-
-    //Префаб огненого шара
-    public GameObject fireballPrefab;
-
-    //Место откуда огненый шар появляеться
-    public Transform attackPoint;
-
-
-
-    private void Update()
+    
+    void Start()
     {
-        //Условие нажатие на лкм
-        if (Input.GetMouseButtonDown(0))
+        
+    }
+
+    void Update()
+    {
+        if (squares.Count == 0)
         {
-            //Создание копии(префаб,где появиться,поворот)
-            Instantiate(fireballPrefab, attackPoint.position, attackPoint.rotation);
+            Victory();
         }
     }
-
-    //Метод получения урона
-    public void TakeDamage(int damage)
+    public static void Defeat()
     {
-        health -= damage;
-        print("Health:" + health);
+        score = 0;
     }
-
-    //Метод увелечения монет
-    public void CollectCoins()
+    void Awake()
     {
-        coins += 1;
-        print("coins" + coins);
+        squares = new List<Square>();
+    }
+        public static void Victory()
+        {
+            UI.ShowVictoryPanel();
+        }
+    public static void Restart()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index);
     }
 }
