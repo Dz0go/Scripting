@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    public int health;
     public float speed;
-    public Transform target;
-    public int playerDamage = 2;
 
+    //Метод получения урона
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Update is called once per frame
     void Update()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+    {   
+        
+        transform.position -= Vector3.up * speed * Time.deltaTime;
 
-        transform.LookAt(target.position);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Player player = other.GetComponent<Player>();
-        player.TakeDamage(playerDamage);
-    }
-
+    
 }

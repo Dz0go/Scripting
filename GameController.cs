@@ -1,27 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public static float gameSpeed;
-
-    [Range(0, 5)]
-    public float gameSpeedRegulator;
-    public float speedRate = 0.5f;
-    public float gameSpeedMax = 5;
-    void Start()
+    public void ClearSave()
     {
-        
+        ClearLevel();
+        ClearCrystals();
+        ClearHealthGrade();
     }
 
-    void Update()
+    public static void SaveLevel()
     {
-        if (gameSpeedRegulator <= gameSpeedMax)
-        {
-            gameSpeedRegulator += speedRate * Time.deltaTime; 
-        }
-        gameSpeed = gameSpeedRegulator;
+        PlayerPrefs.SetInt("level", LevelController.level);
     }
+
+    public static void SaveCrystals()
+    {
+        PlayerPrefs.SetInt("crystals", Corn.singleton.crystals);
+    }
+
+    public static void SaveHealthGrade()
+    {
+        PlayerPrefs.SetInt("healthGrade", UpgradeController.healthGrade);
+    }
+
+    public static void ClearLevel()
+    {
+        PlayerPrefs.SetInt("level", 1);
+    }
+
+    public static void ClearCrystals()
+    {
+        PlayerPrefs.SetInt("crystals", 0);
+    }
+
+    public static void ClearHealthGrade()
+    {
+        PlayerPrefs.SetInt("healthGrade", 0);
+    }
+
 }
